@@ -1,0 +1,24 @@
+import 'package:dartz/dartz.dart';
+import 'package:rick_and_morty/config/error/failure.dart';
+import 'package:rick_and_morty/config/util/safecall/safe_data_source_call.dart';
+import 'package:rick_and_morty/feature/home/data/datasource/home_remote_data_source.dart';
+import 'package:rick_and_morty/feature/home/data/mapper/character_page_mapper.dart';
+import 'package:rick_and_morty/feature/home/domain/entity/character_page.dart';
+import 'package:rick_and_morty/feature/home/domain/repository/home_repository.dart';
+
+class HomeRepositoryImpl implements HomeRepository {
+  HomeRepositoryImpl(this._remoteDataSource);
+
+  final HomeRemoteDataSource _remoteDataSource;
+
+  @override
+  Future<Either<Failure, CharacterPage>> getCharacterPage() {
+    return safeRemoteDataSourceCall(() async {
+      final characterPageDto = await _remoteDataSource.getCharacterPage();
+
+      final characterPage = CharacterPageMapper.fromDto(characterPageDto);
+
+      return characterPage;
+    });
+  }
+}
