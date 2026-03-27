@@ -1,0 +1,1 @@
+const appName = 'Rick and Morty';
