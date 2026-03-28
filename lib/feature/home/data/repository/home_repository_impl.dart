@@ -7,7 +7,7 @@ import 'package:rick_and_morty/feature/home/domain/entity/character_page.dart';
 import 'package:rick_and_morty/feature/home/domain/repository/home_repository.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
-  HomeRepositoryImpl(this._remoteDataSource);
+  HomeRepositoryImpl({required this._remoteDataSource});
 
   final HomeRemoteDataSource _remoteDataSource;
 
