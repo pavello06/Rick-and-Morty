@@ -16,5 +16,22 @@ abstract class CharacterMapper {
     episode: dto.episode,
     url: dto.url,
     created: dto.created,
+    isFavorite: dto.isFavorite,
+  );
+
+  static CharacterDto toDto(Character character) => CharacterDto(
+    id: character.id,
+    name: character.name,
+    status: character.status,
+    species: character.species,
+    type: character.type,
+    gender: character.gender,
+    origin: LocationMapper.toDto(character.origin),
+    location: LocationMapper.toDto(character.location),
+    image: character.image,
+    episode: character.episode,
+    url: character.url,
+    created: character.created,
+    isFavorite: character.isFavorite,
   );
 }

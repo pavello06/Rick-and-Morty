@@ -20,5 +20,6 @@ abstract class Character with _$Character {
     required List<String> episode,
     required String url,
     required DateTime created,
+    required bool isFavorite,
   }) = _Character;
 }

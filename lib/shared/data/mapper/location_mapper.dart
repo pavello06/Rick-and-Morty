@@ -4,4 +4,7 @@ import 'package:rick_and_morty/shared/domain/entity/location.dart';
 abstract class LocationMapper {
   static Location fromDto(LocationDto dto) =>
       Location(name: dto.name, url: dto.url);
+
+  static LocationDto toDto(Location location) =>
+      LocationDto(name: location.name, url: location.url);
 }

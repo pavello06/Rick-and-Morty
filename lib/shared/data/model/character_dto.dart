@@ -21,6 +21,7 @@ abstract class CharacterDto with _$CharacterDto {
     required List<String> episode,
     required String url,
     required DateTime created,
+    @Default(false) bool isFavorite,
   }) = _CharacterDto;
 
   factory CharacterDto.fromJson(Map<String, dynamic> json) =>
