@@ -1,14 +1,39 @@
-import 'package:flutter/widgets.dart';
-import 'package:rick_and_morty/shared/domain/entity/character.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/feature/home/presentation/bloc/home_cubit.dart';
+import 'package:rick_and_morty/feature/home/presentation/bloc/home_state.dart';
 import 'package:rick_and_morty/shared/presentation/widget/character_list_view.dart';
 
 class HomeLoadedContent extends StatelessWidget {
-  const HomeLoadedContent({super.key, required this.characters});
+  const HomeLoadedContent({super.key, required this.state});
 
-  final List<Character> characters;
+  final HomeLoaded state;
 
   @override
   Widget build(BuildContext context) {
-    return CharacterListView(characters: characters);
+    return NotificationListener<ScrollNotification>(
+      child: CharacterListView(
+        characters: state.characters,
+        afterWidget: state.isLoading
+            ? Container(
+                alignment: Alignment.center,
+                padding: const .all(2.0),
+                child: const CircularProgressIndicator(),
+              )
+            : null,
+      ),
+      onNotification: (notification) {
+        final metrics = notification.metrics;
+
+        const threshold = 200.0;
+
+        if (metrics.pixels >= metrics.maxScrollExtent - threshold) {
+          context.read<HomeCubit>().getNextCharacterPage();
+          return true;
+        }
+
+        return false;
+      },
+    );
   }
 }

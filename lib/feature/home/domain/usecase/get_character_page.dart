@@ -8,7 +8,7 @@ class GetCharacterPage {
 
   final HomeRepository _repository;
 
-  Future<Either<Failure, CharacterPage>> call() {
-    return _repository.getCharacterPage();
+  Future<Either<Failure, CharacterPage>> call([String? nextPage]) {
+    return _repository.getCharacterPage(nextPage);
   }
 }

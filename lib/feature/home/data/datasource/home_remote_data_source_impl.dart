@@ -10,9 +10,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl();
 
   @override
-  Future<CharacterPageDto> getCharacterPage() async {
+  Future<CharacterPageDto> getCharacterPage([String? nextPage]) async {
     final response = await http.get(
-      Uri.parse('$baseUrl/character'),
+      Uri.parse(nextPage ?? '$baseUrl/character'),
       headers: {'Content-Type': 'application/json'},
     );
 

@@ -12,9 +12,9 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<Failure, CharacterPage>> getCharacterPage() {
+  Future<Either<Failure, CharacterPage>> getCharacterPage([String? nextPage]) {
     return safeRemoteDataSourceCall(() async {
-      final characterPageDto = await _remoteDataSource.getCharacterPage();
+      final characterPageDto = await _remoteDataSource.getCharacterPage(nextPage);
 
       final characterPage = CharacterPageMapper.fromDto(characterPageDto);
 

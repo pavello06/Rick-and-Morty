@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         } else if (state is HomeLoading) {
           return LoadingContent();
         } else if (state is HomeLoaded) {
-          return HomeLoadedContent(characters: state.characters);
+          return HomeLoadedContent(state: state);
         } else if (state is HomeError) {
           return ErrorContent(
             onRetry: () {
