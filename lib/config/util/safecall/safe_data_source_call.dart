@@ -12,3 +12,15 @@ Future<Either<Failure, T>> safeRemoteDataSourceCall<T>(Future<T> Function() call
     return Left(UnknownFailure());
   }
 }
+
+Future<Either<Failure, T>> safeLocalDataSourceCall<T>(Future<T> Function() call) async {
+  try {
+    final response = await call();
+    return Right(response);
+  } on CacheException {
+    return Left(CacheFailure());
+  } 
+  on Exception {
+    return Left(UnknownFailure());
+  }
+}
