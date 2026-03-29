@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/config/constant/app_constant.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_cubit.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/page/favorite_page.dart';
 import 'package:rick_and_morty/feature/home/presentation/bloc/home_cubit.dart';
@@ -17,7 +18,7 @@ final appRouter = GoRouter(
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Rick and Morty',
+              appName,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/config/l10n/s.dart';
 
 class ErrorSnackBarContent extends StatelessWidget {
   const ErrorSnackBarContent({super.key});
@@ -6,12 +7,11 @@ class ErrorSnackBarContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
-        Icon(Icons.error, color: Colors.red),
+      spacing: 16.0,
+      children: [
+        const Icon(Icons.error),
 
-        SizedBox(width: 16.0),
-
-        Text('Произошла ошибка'),
+        Text(S.of(context).errorSnackBarText),
       ],
     );
   }

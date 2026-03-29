@@ -16,21 +16,16 @@ class MyNavigationBarProvider extends ChangeNotifier {
   }
 }
 
-class MyNavigationBar extends StatefulWidget {
+class MyNavigationBar extends StatelessWidget {
   const MyNavigationBar({super.key});
 
-  @override
-  State<MyNavigationBar> createState() => _MyNavigationBarState();
-}
-
-class _MyNavigationBarState extends State<MyNavigationBar> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MyNavigationBarProvider>(context);
     final activeItem = provider._activeItem;
 
     return Container(
-      padding: const .symmetric(vertical: 8.0, horizontal:  16.0),
+      padding: const .symmetric(vertical: 8.0, horizontal: 16.0),
       color: T.of(context).colorScheme.tertiary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

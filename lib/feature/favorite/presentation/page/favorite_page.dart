@@ -27,7 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             context.read<FavoriteCubit>().init();
           });
-    
+
           return LoadingContent();
         } else if (state is FavoriteLoading) {
           return LoadingContent();
@@ -40,7 +40,7 @@ class _FavoritePageState extends State<FavoritePage> {
             },
           );
         }
-    
+
         return const SizedBox.shrink();
       },
     );

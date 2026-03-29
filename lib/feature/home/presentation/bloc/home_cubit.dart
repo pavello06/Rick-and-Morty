@@ -9,15 +9,16 @@ import 'package:rick_and_morty/shared/domain/usecase/save_character.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
     required this._getCharacterPage,
+    required this._updateCharacterList,
     required this._saveCharacter,
     required this._deleteCharacter,
-    required this._updateCharacterList,
   }) : super(HomeInitial());
 
   final GetCharacterPage _getCharacterPage;
+  final UpdateCharacterList _updateCharacterList;
   final SaveCharacter _saveCharacter;
   final DeleteCharacter _deleteCharacter;
-  final UpdateCharacterList _updateCharacterList;
+
   bool _isThrottled = false;
   static const _throttleDuration = Duration(seconds: 2);
 
@@ -27,34 +28,41 @@ class HomeCubit extends Cubit<HomeState> {
     final result = await _getCharacterPage();
 
     if (!isClosed) {
-      emit(
-        result.fold(
-          (failure) => HomeError(failure: failure),
-          (characterPage) => HomeLoaded(
-            characters: characterPage.results,
-            nextPage: characterPage.info.next,
-          ),
-        ),
-      );
+      result.fold((failure) => emit(HomeError(failure: failure)), (
+        characterPage,
+      ) async {
+        final result = await _updateCharacterList(characterPage.results);
+
+        if (!isClosed) {
+          emit(
+            result.fold((failure) => HomeError(failure: failure), (characters) {
+              return HomeLoaded(
+                characters: characters,
+                nextPage: characterPage.info.next,
+              );
+            }),
+          );
+        }
+      });
     }
   }
 
   Future<void> update() async {
-    final currentState = state;
-    if (currentState is! HomeLoaded ||
-        currentState.nextPage == null ||
-        currentState.isLoading) {
-      return;
-    }
+    if (state is! HomeLoaded) return;
 
-    final result = await _updateCharacterList(currentState.characters);
+    final loadedState = state as HomeLoaded;
+
+    final result = await _updateCharacterList(loadedState.characters);
 
     if (!isClosed) {
+      final loadedState = state as HomeLoaded;
       emit(
-        result.fold((failure) => HomeError(failure: failure), (characters) {
-          return HomeLoaded(
+        result.fold((failure) => loadedState.copyWith(failure: failure), (
+          characters,
+        ) {
+          return loadedState.copyWith(
             characters: characters,
-            nextPage: currentState.nextPage,
+            nextPage: loadedState.nextPage,
           );
         }),
       );
@@ -62,14 +70,14 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> getNextCharacterPage() async {
-    final currentState = state;
-    if (currentState is! HomeLoaded ||
-        currentState.nextPage == null ||
-        currentState.isLoading) {
+    final loadedState = state;
+    if (loadedState is! HomeLoaded ||
+        loadedState.nextPage == null ||
+        loadedState.isLoading) {
       return;
     }
 
-    emit(currentState.copyWith(isLoading: true, failure: null));
+    emit(loadedState.copyWith(isLoading: true, failure: null));
 
     if (_isThrottled) {
       await Future.delayed(_throttleDuration, () {
@@ -77,18 +85,18 @@ class HomeCubit extends Cubit<HomeState> {
       });
     }
     _isThrottled = true;
-    final result = await _getCharacterPage(currentState.nextPage);
+    final result = await _getCharacterPage(loadedState.nextPage);
 
     if (!isClosed) {
+      final loadedState = state as HomeLoaded;
       emit(
         result.fold(
-          (failure) =>
-              currentState.copyWith(isLoading: false, failure: failure),
-          (characterPage) => currentState.copyWith(
-            characters: [...currentState.characters, ...characterPage.results],
+          (failure) => loadedState.copyWith(isLoading: false, failure: failure),
+          (characterPage) => loadedState.copyWith(
+            characters: [...loadedState.characters, ...characterPage.results],
             nextPage: characterPage.info.next,
             isLoading: false,
-            failure: null
+            failure: null,
           ),
         ),
       );
@@ -96,26 +104,22 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> toggleCharacter(Character character) async {
-    final currentState = state;
-    if (currentState is! HomeLoaded) {
-      return;
-    }
-
     final result = await (character.isFavorite
         ? _deleteCharacter(character.id)
         : _saveCharacter(character));
 
     if (!isClosed) {
+      final loadedState = state as HomeLoaded;
       emit(
-        result.fold((failure) => currentState.copyWith(failure: failure), (_) {
+        result.fold((failure) => loadedState.copyWith(failure: failure), (_) {
           final newCharacter = character.copyWith(
             isFavorite: !character.isFavorite,
           );
-          final characters = currentState.characters
+          final characters = loadedState.characters
               .map((c) => c.id == character.id ? newCharacter : c)
               .toList();
 
-          return currentState.copyWith(characters: characters);
+          return loadedState.copyWith(characters: characters);
         }),
       );
     }

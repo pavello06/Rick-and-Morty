@@ -17,31 +17,15 @@ class HomeRepositoryImpl implements HomeRepository {
   final HomeLocalDataSource _localDataSource;
 
   @override
-  Future<Either<Failure, CharacterPage>> getCharacterPage([
-    String? nextPage,
-  ]) async {
-    final favoriteCharacterIdsOrFailure = await safeLocalDataSourceCall(
-      () => _localDataSource.getFavoriteCharacterIdList(),
-    );
+  Future<Either<Failure, CharacterPage>> getCharacterPage([String? nextPage]) {
+    return safeRemoteDataSourceCall(() async {
+      final characterPageDto = await _remoteDataSource.getCharacterPage(
+        nextPage,
+      );
 
-    return favoriteCharacterIdsOrFailure.fold((failure) => Left(failure), (
-      favoriteCharacterIds,
-    ) {
-      return safeRemoteDataSourceCall(() async {
-        final characterPageDto = await _remoteDataSource.getCharacterPage(
-          nextPage,
-        );
+      final characterPage = CharacterPageMapper.fromDto(characterPageDto);
 
-        var characterPage = CharacterPageMapper.fromDto(characterPageDto);
-        characterPage = characterPage.copyWith(
-          results: characterPage.results.map((character) {
-            final isFavorite = favoriteCharacterIds.contains(character.id);
-            return character.copyWith(isFavorite: isFavorite);
-          }).toList(),
-        );
-
-        return characterPage;
-      });
+      return characterPage;
     });
   }
 

@@ -16,9 +16,7 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
     return safeLocalDataSourceCall(() async {
       final characterDtos = await _localDataSource.getFavoriteCharacterList();
 
-      final characters = characterDtos
-          .map((dto) => CharacterMapper.fromDto(dto))
-          .toList();
+      final characters = characterDtos.map(CharacterMapper.fromDto).toList();
 
       return characters;
     });

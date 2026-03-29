@@ -1,1 +1,6 @@
-{}
+{
+    "errorContentText": "Произошла ошибка. Попробуйте еще раз.",
+    "errorContentButton": "Повторить",
+
+    "errorSnackBarText": "Произошла ошибка."
+}

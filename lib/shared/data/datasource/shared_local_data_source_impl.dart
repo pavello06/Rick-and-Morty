@@ -5,6 +5,8 @@ import 'package:rick_and_morty/shared/data/datasource/shared_local_data_source.d
 import 'package:rick_and_morty/shared/data/model/character_dto.dart';
 
 class SharedLocalDataSourceImpl implements SharedLocalDataSource {
+  SharedLocalDataSourceImpl();
+
   @override
   Future<void> saveCharacter(CharacterDto character) async {
     await Hive.box<String>(

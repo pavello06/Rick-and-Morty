@@ -13,9 +13,7 @@ class FavoriteLoadedContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return CharacterListView(
       characters: state.characters,
-      toggle: (character) {
-        context.read<FavoriteCubit>().toggleCharacter(character);
-      },
+      toggle: context.read<FavoriteCubit>().deleteCharacter,
     );
   }
 }

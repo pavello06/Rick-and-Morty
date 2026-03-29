@@ -4,7 +4,11 @@ import 'package:rick_and_morty/config/theme/t.dart';
 import 'package:rick_and_morty/shared/domain/entity/character.dart';
 
 class CharacterCard extends StatelessWidget {
-  const CharacterCard({super.key, required this.character, required this.toggle});
+  const CharacterCard({
+    super.key,
+    required this.character,
+    required this.toggle,
+  });
 
   final Character character;
   final void Function(Character character) toggle;
@@ -34,7 +38,7 @@ class CharacterCard extends StatelessWidget {
                 ),
                 width: 80.0,
                 height: 80.0,
-                child: Icon(Icons.image),
+                child: const Icon(Icons.image),
               ),
               width: 80.0,
               height: 80.0,
@@ -72,7 +76,7 @@ class CharacterCard extends StatelessWidget {
                         },
                         icon: character.isFavorite
                             ? const Icon(Icons.favorite)
-                            : Icon(Icons.favorite_border),
+                            : const Icon(Icons.favorite_border),
                       ),
                     ),
                   ],

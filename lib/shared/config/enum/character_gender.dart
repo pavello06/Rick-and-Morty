@@ -1,16 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 @JsonEnum(valueField: 'name')
-enum CharacterGender { 
+enum CharacterGender {
   @JsonValue('Male')
-  male, 
-  
+  male,
+
   @JsonValue('Female')
-  female, 
-  
+  female,
+
   @JsonValue('Genderless')
-  genderless, 
-  
+  genderless,
+
   @JsonValue('unknown')
-  unknown 
+  unknown,
 }

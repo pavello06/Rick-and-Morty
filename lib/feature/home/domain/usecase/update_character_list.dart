@@ -17,12 +17,12 @@ class UpdateCharacterList {
     return favoriteCharacterIdsOrFailure.fold((failure) => Left(failure), (
       favoriteCharacterIds,
     ) {
-      return Right(
-        characters.map((character) {
-          final isFavorite = favoriteCharacterIds.contains(character.id);
-          return character.copyWith(isFavorite: isFavorite);
-        }).toList(),
-      );
+      final updatedCharacters = characters.map((character) {
+        final isFavorite = favoriteCharacterIds.contains(character.id);
+        return character.copyWith(isFavorite: isFavorite);
+      }).toList();
+
+      return Right(updatedCharacters);
     });
   }
 }

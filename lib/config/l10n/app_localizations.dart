@@ -93,6 +93,24 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('ru')];
+
+  /// No description provided for @errorContentText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла ошибка. Попробуйте еще раз.'**
+  String get errorContentText;
+
+  /// No description provided for @errorContentButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторить'**
+  String get errorContentButton;
+
+  /// No description provided for @errorSnackBarText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Произошла ошибка.'**
+  String get errorSnackBarText;
 }
 
 class _AppLocalizationsDelegate

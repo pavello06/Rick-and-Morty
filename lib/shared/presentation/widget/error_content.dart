@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/config/l10n/s.dart';
 import 'package:rick_and_morty/config/theme/t.dart';
 
 class ErrorContent extends StatelessWidget {
@@ -14,14 +15,17 @@ class ErrorContent extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            'Не удалось загрузить данные',
+            S.of(context).errorContentText,
             style: T.of(context).textTheme.titleLarge,
           ),
         ),
 
         TextButton(
           onPressed: onRetry,
-          child: Text('Повторить', style: T.of(context).textTheme.bodyLarge),
+          child: Text(
+            S.of(context).errorContentButton,
+            style: T.of(context).textTheme.bodyLarge,
+          ),
         ),
       ],
     );

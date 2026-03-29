@@ -71,9 +71,9 @@ abstract class DI {
     getIt.registerLazySingleton(
       () => HomeCubit(
         getCharacterPage: getIt(),
+        updateCharacterList: getIt(),
         saveCharacter: getIt(),
         deleteCharacter: getIt(),
-        updateCharacterList: getIt(),
       ),
     );
 
@@ -95,7 +95,6 @@ abstract class DI {
     getIt.registerLazySingleton(
       () => FavoriteCubit(
         getFavoriteCharacterList: getIt(),
-        saveCharacter: getIt(),
         deleteCharacter: getIt(),
       ),
     );
