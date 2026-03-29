@@ -7,10 +7,12 @@ class CharacterListView extends StatelessWidget {
     super.key,
     required this.characters,
     this.afterWidget,
+    required this.toggle,
   });
 
   final List<Character> characters;
   final Widget? afterWidget;
+  final void Function(Character character) toggle;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CharacterListView extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (_, index) =>
             afterWidget == null || index != characters.length
-            ? CharacterCard(character: characters[index])
+            ? CharacterCard(character: characters[index], toggle: toggle)
             : afterWidget,
         separatorBuilder: (_, _) => const SizedBox(height: 16.0),
         itemCount: characters.length + (afterWidget != null ? 1 : 0),

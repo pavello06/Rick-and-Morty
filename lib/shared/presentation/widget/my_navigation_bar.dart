@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/config/theme/t.dart';
+import 'package:rick_and_morty/feature/favorite/presentation/page/favorite_page.dart';
 import 'package:rick_and_morty/feature/home/presentation/page/home_page.dart';
 
 enum _ActiveItem { home, favorite }
@@ -47,6 +48,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
           _Item(
             onTap: () {
               if (activeItem == _ActiveItem.favorite) return;
+              context.go(FavoritePage.fullRoute());
               provider._setActiveItem(_ActiveItem.favorite);
             },
             isActive: activeItem == _ActiveItem.favorite,
