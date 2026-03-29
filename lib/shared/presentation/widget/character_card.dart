@@ -61,9 +61,14 @@ class CharacterCard extends StatelessWidget {
                       ),
                     ),
 
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite_border),
+                    SizedBox(
+                      width: 29.0,
+                      height: 29.0,
+                      child: IconButton(
+                        padding: const .all(0),
+                        onPressed: () {},
+                        icon: Icon(Icons.favorite_border),
+                      ),
                     ),
                   ],
                 ),
