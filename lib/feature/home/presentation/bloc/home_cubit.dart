@@ -1,13 +1,25 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/feature/home/domain/usecase/get_character_page.dart';
+import 'package:rick_and_morty/feature/home/domain/usecase/update_character_list.dart';
 import 'package:rick_and_morty/feature/home/presentation/bloc/home_state.dart';
+import 'package:rick_and_morty/shared/domain/entity/character.dart';
+import 'package:rick_and_morty/shared/domain/usecase/delete_character.dart';
+import 'package:rick_and_morty/shared/domain/usecase/save_character.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit({required this._getCharacterPage}) : super(HomeInitial());
+  HomeCubit({
+    required this._getCharacterPage,
+    required this._saveCharacter,
+    required this._deleteCharacter,
+    required this._updateCharacterList,
+  }) : super(HomeInitial());
 
   final GetCharacterPage _getCharacterPage;
+  final SaveCharacter _saveCharacter;
+  final DeleteCharacter _deleteCharacter;
+  final UpdateCharacterList _updateCharacterList;
   bool _isThrottled = false;
-  static const _throttleDuration = Duration(seconds: 1);
+  static const _throttleDuration = Duration(seconds: 2);
 
   Future<void> init() async {
     emit(HomeLoading());
@@ -23,6 +35,28 @@ class HomeCubit extends Cubit<HomeState> {
             nextPage: characterPage.info.next,
           ),
         ),
+      );
+    }
+  }
+
+  Future<void> update() async {
+    final currentState = state;
+    if (currentState is! HomeLoaded ||
+        currentState.nextPage == null ||
+        currentState.isLoading) {
+      return;
+    }
+
+    final result = await _updateCharacterList(currentState.characters);
+
+    if (!isClosed) {
+      emit(
+        result.fold((failure) => HomeError(failure: failure), (characters) {
+          return HomeLoaded(
+            characters: characters,
+            nextPage: currentState.nextPage,
+          );
+        }),
       );
     }
   }
@@ -54,8 +88,35 @@ class HomeCubit extends Cubit<HomeState> {
             characters: [...currentState.characters, ...characterPage.results],
             nextPage: characterPage.info.next,
             isLoading: false,
+            failure: null
           ),
         ),
+      );
+    }
+  }
+
+  Future<void> toggleCharacter(Character character) async {
+    final currentState = state;
+    if (currentState is! HomeLoaded) {
+      return;
+    }
+
+    final result = await (character.isFavorite
+        ? _deleteCharacter(character.id)
+        : _saveCharacter(character));
+
+    if (!isClosed) {
+      emit(
+        result.fold((failure) => currentState.copyWith(failure: failure), (_) {
+          final newCharacter = character.copyWith(
+            isFavorite: !character.isFavorite,
+          );
+          final characters = currentState.characters
+              .map((c) => c.id == character.id ? newCharacter : c)
+              .toList();
+
+          return currentState.copyWith(characters: characters);
+        }),
       );
     }
   }

@@ -21,6 +21,9 @@ class HomeLoadedContent extends StatelessWidget {
                 child: const CircularProgressIndicator(),
               )
             : null,
+        toggle: (character) {
+          context.read<HomeCubit>().toggleCharacter(character);
+        },
       ),
       onNotification: (notification) {
         final metrics = notification.metrics;

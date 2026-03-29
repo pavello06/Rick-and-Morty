@@ -5,6 +5,7 @@ import 'package:rick_and_morty/feature/home/presentation/bloc/home_cubit.dart';
 import 'package:rick_and_morty/feature/home/presentation/bloc/home_state.dart';
 import 'package:rick_and_morty/feature/home/presentation/widget/home_loaded_content.dart';
 import 'package:rick_and_morty/shared/presentation/widget/error_content.dart';
+import 'package:rick_and_morty/shared/presentation/widget/error_snack_bar.dart';
 import 'package:rick_and_morty/shared/presentation/widget/loading_content.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             context.read<HomeCubit>().init();
           });
-    
+
           return LoadingContent();
         } else if (state is HomeLoading) {
           return LoadingContent();
@@ -40,10 +41,14 @@ class _HomePageState extends State<HomePage> {
             },
           );
         }
-    
+
         return const SizedBox.shrink();
       },
-      listener: (context, state) {},
+      listener: (context, state) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: ErrorSnackBarContent()));
+      },
       listenWhen: (previous, current) =>
           previous is HomeLoaded &&
           current is HomeLoaded &&
