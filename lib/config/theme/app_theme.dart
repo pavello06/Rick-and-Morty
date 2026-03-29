@@ -10,6 +10,19 @@ abstract class AppTheme {
       secondary: palette.secondary(),
       tertiary: palette.tertiary(),
     ),
+    appBarTheme: AppBarTheme(
+      backgroundColor: palette.tertiary(),
+      surfaceTintColor: palette.tertiary(),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: palette.secondary(),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: palette.secondary(),
+        backgroundColor: palette.tertiary(),
+      ),
+    )
   );
 
   static ThemeData light() => _data(AppPaletteLight());
