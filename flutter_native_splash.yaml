@@ -1,11 +1,11 @@
 flutter_native_splash:
   color: "#121212"
 
-  image: assets/images/rick_and_morty_app_icon.png 
+  image: assets/images/rick_and_morty_app_splash.png 
 
   fullscreen: true
 
   android_12:
     color: "#121212"
 
-    image: assets/images/rick_and_morty_app_icon.png     
+    image: assets/images/rick_and_morty_app_splash.png     
