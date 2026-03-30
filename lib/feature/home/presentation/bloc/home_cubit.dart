@@ -60,10 +60,7 @@ class HomeCubit extends Cubit<HomeState> {
         result.fold((failure) => loadedState.copyWith(failure: failure), (
           characters,
         ) {
-          return loadedState.copyWith(
-            characters: characters,
-            nextPage: loadedState.nextPage,
-          );
+          return loadedState.copyWith(characters: characters);
         }),
       );
     }

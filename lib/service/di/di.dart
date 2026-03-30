@@ -129,7 +129,12 @@ abstract class DI {
 
     // Bloc
     getIt.registerFactoryParam<CharacterCubit, int, void>(
-      (id, _) => CharacterCubit(id: id, getCharacter: getIt()),
+      (id, _) => CharacterCubit(
+        id: id,
+        getCharacter: getIt(),
+        saveCharacter: getIt(),
+        deleteCharacter: getIt(),
+      ),
     );
   }
 }

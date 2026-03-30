@@ -19,10 +19,7 @@ class CharacterCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        final state = GoRouterState.of(context);
-        var path = state.path!;
-        path = path == '/' ? '' : path;
-        context.push(CharacterPage.fullRoute(parent: path, id: character.id));
+        context.push(CharacterPage.fullRoute(id: character.id));
       },
       child: Container(
         padding: const .all(16.0),

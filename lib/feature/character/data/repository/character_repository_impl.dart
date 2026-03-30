@@ -18,8 +18,8 @@ class CharacterRepositoryImpl implements CharacterRepository {
 
   @override
   Future<Either<Failure, Character>> getCharacter(int id) async {
-    final characterOrFailure = await safeRemoteDataSourceCall(() async {
-      final characterDto = await _remoteDataSource.getCharacter(id);
+    final characterOrFailure = await safeLocalDataSourceCall(() async {
+      final characterDto = await _localDataSource.getCharacter(id);
 
       final character = CharacterMapper.fromDto(characterDto);
 
@@ -30,8 +30,8 @@ class CharacterRepositoryImpl implements CharacterRepository {
       return characterOrFailure;
     }
 
-    return safeLocalDataSourceCall(() async {
-      final characterDto = await _localDataSource.getCharacter(id);
+    return safeRemoteDataSourceCall(() async {
+      final characterDto = await _remoteDataSource.getCharacter(id);
 
       final character = CharacterMapper.fromDto(characterDto);
 

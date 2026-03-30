@@ -13,8 +13,8 @@ class CharacterPage extends StatefulWidget {
 
   static const route = '/character/:id';
 
-  static String fullRoute({required String parent, required int id}) =>
-      '$parent${route.replaceFirst(':id', id.toString())}';
+  static String fullRoute({required int id}) =>
+      route.replaceFirst(':id', id.toString());
 
   @override
   State<CharacterPage> createState() => _CharacterPageState();
@@ -29,6 +29,24 @@ class _CharacterPageState extends State<CharacterPage> {
           S.of(context).characterPageTitle,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          BlocBuilder<CharacterCubit, CharacterState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: state is CharacterLoaded
+                    ? () {
+                        context.read<CharacterCubit>().toggleCharacter(
+                          state.character,
+                        );
+                      }
+                    : null,
+                icon: state is CharacterLoaded && state.character.isFavorite
+                    ? const Icon(Icons.favorite)
+                    : const Icon(Icons.favorite_border),
+              );
+            },
+          ),
+        ],
       ),
 
       body: Padding(
