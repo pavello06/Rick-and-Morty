@@ -17,7 +17,7 @@ class HomeLoadedContent extends StatelessWidget {
         afterWidget: state.isLoading
             ? Container(
                 alignment: Alignment.center,
-                padding: const .all(2.0),
+                padding: const EdgeInsets.all(2.0),
                 child: const CircularProgressIndicator(),
               )
             : null,

@@ -9,9 +9,10 @@ import 'package:rick_and_morty/feature/home/domain/repository/home_repository.da
 
 class HomeRepositoryImpl implements HomeRepository {
   HomeRepositoryImpl({
-    required this._remoteDataSource,
-    required this._localDataSource,
-  });
+    required HomeRemoteDataSource remoteDataSource,
+    required HomeLocalDataSource localDataSource,
+  }) : _remoteDataSource = remoteDataSource,
+       _localDataSource = localDataSource;
 
   final HomeRemoteDataSource _remoteDataSource;
   final HomeLocalDataSource _localDataSource;

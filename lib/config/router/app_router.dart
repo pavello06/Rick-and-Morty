@@ -26,7 +26,7 @@ final appRouter = GoRouter(
           ),
 
           body: Padding(
-            padding: const .symmetric(vertical: 4.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
             child: child,
           ),
 

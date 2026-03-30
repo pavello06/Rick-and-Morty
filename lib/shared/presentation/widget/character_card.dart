@@ -22,7 +22,7 @@ class CharacterCard extends StatelessWidget {
         context.push(CharacterPage.fullRoute(id: character.id));
       },
       child: Container(
-        padding: const .all(16.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           color: T.of(context).colorScheme.tertiary,
           borderRadius: BorderRadius.circular(16.0),
@@ -76,7 +76,7 @@ class CharacterCard extends StatelessWidget {
                         width: 29.0,
                         height: 29.0,
                         child: IconButton(
-                          padding: const .all(0),
+                          padding: const EdgeInsets.all(0),
                           onPressed: () {
                             toggle(character);
                           },

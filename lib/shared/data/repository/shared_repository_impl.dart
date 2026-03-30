@@ -7,7 +7,8 @@ import 'package:rick_and_morty/shared/domain/entity/character.dart';
 import 'package:rick_and_morty/shared/domain/repository/shared_repository.dart';
 
 class SharedRepositoryImpl implements SharedRepository {
-  SharedRepositoryImpl({required this._localDataSource});
+  SharedRepositoryImpl({required SharedLocalDataSource localDataSource})
+    : _localDataSource = localDataSource;
 
   final SharedLocalDataSource _localDataSource;
 

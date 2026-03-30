@@ -25,7 +25,7 @@ class MyNavigationBar extends StatelessWidget {
     final activeItem = provider._activeItem;
 
     return Container(
-      padding: const .symmetric(vertical: 8.0, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       color: T.of(context).colorScheme.tertiary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

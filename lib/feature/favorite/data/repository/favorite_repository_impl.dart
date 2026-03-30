@@ -7,7 +7,8 @@ import 'package:rick_and_morty/shared/data/mapper/character_mapper.dart';
 import 'package:rick_and_morty/shared/domain/entity/character.dart';
 
 class FavoriteRepositoryImpl implements FavoriteRepository {
-  FavoriteRepositoryImpl({required this._localDataSource});
+  FavoriteRepositoryImpl({required FavoriteLocalDataSource localDataSource})
+    : _localDataSource = localDataSource;
 
   final FavoriteLocalDataSource _localDataSource;
 

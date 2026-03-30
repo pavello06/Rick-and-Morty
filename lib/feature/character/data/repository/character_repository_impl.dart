@@ -9,9 +9,10 @@ import 'package:rick_and_morty/shared/domain/entity/character.dart';
 
 class CharacterRepositoryImpl implements CharacterRepository {
   CharacterRepositoryImpl({
-    required this._remoteDataSource,
-    required this._localDataSource,
-  });
+    required CharacterRemoteDataSource remoteDataSource,
+    required CharacterLocalDataSource localDataSource,
+  }) : _remoteDataSource = remoteDataSource,
+       _localDataSource = localDataSource;
 
   final CharacterRemoteDataSource _remoteDataSource;
   final CharacterLocalDataSource _localDataSource;

@@ -6,9 +6,11 @@ import 'package:rick_and_morty/shared/domain/usecase/delete_character.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {
   FavoriteCubit({
-    required this._getFavoriteCharacterList,
-    required this._deleteCharacter,
-  }) : super(FavoriteInitial());
+    required GetFavoriteCharacterList getFavoriteCharacterList,
+    required DeleteCharacter deleteCharacter,
+  }) : _getFavoriteCharacterList = getFavoriteCharacterList,
+       _deleteCharacter = deleteCharacter,
+       super(FavoriteInitial());
 
   final GetFavoriteCharacterList _getFavoriteCharacterList;
   final DeleteCharacter _deleteCharacter;

@@ -50,7 +50,7 @@ class _CharacterPageState extends State<CharacterPage> {
       ),
 
       body: Padding(
-        padding: const .symmetric(vertical: 4.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
         child: BlocBuilder<CharacterCubit, CharacterState>(
           builder: (context, state) {
             if (state is CharacterInitial) {

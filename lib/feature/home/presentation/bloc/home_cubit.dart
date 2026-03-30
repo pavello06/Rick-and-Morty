@@ -8,11 +8,15 @@ import 'package:rick_and_morty/shared/domain/usecase/save_character.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
-    required this._getCharacterPage,
-    required this._updateCharacterList,
-    required this._saveCharacter,
-    required this._deleteCharacter,
-  }) : super(HomeInitial());
+    required GetCharacterPage getCharacterPage,
+    required UpdateCharacterList updateCharacterList,
+    required SaveCharacter saveCharacter,
+    required DeleteCharacter deleteCharacter,
+  }) : _getCharacterPage = getCharacterPage,
+       _updateCharacterList = updateCharacterList,
+       _saveCharacter = saveCharacter,
+       _deleteCharacter = deleteCharacter,
+       super(HomeInitial());
 
   final GetCharacterPage _getCharacterPage;
   final UpdateCharacterList _updateCharacterList;

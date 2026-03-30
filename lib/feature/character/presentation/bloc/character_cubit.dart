@@ -7,11 +7,15 @@ import 'package:rick_and_morty/shared/domain/usecase/save_character.dart';
 
 class CharacterCubit extends Cubit<CharacterState> {
   CharacterCubit({
-    required this._id,
-    required this._getCharacter,
-    required this._saveCharacter,
-    required this._deleteCharacter,
-  }) : super(CharacterInitial());
+    required int id,
+    required GetCharacter getCharacter,
+    required SaveCharacter saveCharacter,
+    required DeleteCharacter deleteCharacter,
+  }) : _id = id,
+       _getCharacter = getCharacter,
+       _saveCharacter = saveCharacter,
+       _deleteCharacter = deleteCharacter,
+       super(CharacterInitial());
 
   final int _id;
   final GetCharacter _getCharacter;

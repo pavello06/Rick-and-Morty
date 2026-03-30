@@ -46,7 +46,7 @@ class CharacterLoadedContent extends StatelessWidget {
 
             SliverToBoxAdapter(
               child: Container(
-                padding: const .all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   color: T.of(context).colorScheme.tertiary,
                   borderRadius: BorderRadius.circular(16.0),
