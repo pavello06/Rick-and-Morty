@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 
 @JsonEnum(valueField: 'name')
 enum CharacterGender {
@@ -17,9 +17,9 @@ enum CharacterGender {
   unknown;
 
   String title(BuildContext context) => switch (this) {
-    CharacterGender.male => S.of(context).characterGenderMale,
-    CharacterGender.female => S.of(context).characterGenderFemale,
-    CharacterGender.genderless => S.of(context).characterGenderGenderless,
-    CharacterGender.unknown => S.of(context).characterGenderUnknown,
+    CharacterGender.male => AppLocale.of(context).characterGenderMale,
+    CharacterGender.female => AppLocale.of(context).characterGenderFemale,
+    CharacterGender.genderless => AppLocale.of(context).characterGenderGenderless,
+    CharacterGender.unknown => AppLocale.of(context).characterGenderUnknown,
   };
 }

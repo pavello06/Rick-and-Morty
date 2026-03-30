@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 
 @JsonEnum(valueField: 'name')
 enum CharacterStatus {
@@ -14,8 +14,8 @@ enum CharacterStatus {
   unknown;
 
   String title(BuildContext context) => switch (this) {
-    CharacterStatus.alive => S.of(context).characterStatusAlive,
-    CharacterStatus.dead => S.of(context).characterStatusDead,
-    CharacterStatus.unknown => S.of(context).characterStatusUnknown,
+    CharacterStatus.alive => AppLocale.of(context).characterStatusAlive,
+    CharacterStatus.dead => AppLocale.of(context).characterStatusDead,
+    CharacterStatus.unknown => AppLocale.of(context).characterStatusUnknown,
   };
 }

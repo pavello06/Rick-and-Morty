@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
-import 'package:rick_and_morty/config/theme/t.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 import 'package:rick_and_morty/feature/character/presentation/bloc/character_state.dart';
 
 class CharacterLoadedContent extends StatelessWidget {
@@ -27,7 +26,7 @@ class CharacterLoadedContent extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: T.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                       borderRadius: BorderRadius.circular(16.0),
                     ),
@@ -48,7 +47,7 @@ class CharacterLoadedContent extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: T.of(context).colorScheme.tertiary,
+                  color: Theme.of(context).colorScheme.tertiary,
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Column(
@@ -57,7 +56,7 @@ class CharacterLoadedContent extends StatelessWidget {
                   children: [
                     Text(
                       '${character.name} (${character.status.title(context)})',
-                      style: T
+                      style: Theme
                           .of(context)
                           .textTheme
                           .titleLarge!
@@ -66,32 +65,32 @@ class CharacterLoadedContent extends StatelessWidget {
 
                     Text(
                       '${character.species} (${character.gender.title(context)})${character.type.isEmpty ? '' : ' | ${character.type}'}',
-                      style: T.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
 
                     Text(
-                      S
+                      AppLocale
                           .of(context)
                           .characterLoadedContentOrigin(character.origin.name),
-                      style: T.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
 
                     Text(
-                      S
+                      AppLocale
                           .of(context)
                           .characterLoadedContentLocation(
                             character.location.name,
                           ),
-                      style: T.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
 
                     Text(
-                      S
+                      AppLocale
                           .of(context)
                           .characterLoadedContentEpisode(
                             character.episode.length,
                           ),
-                      style: T.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ],
                 ),

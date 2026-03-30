@@ -22,7 +22,7 @@ import 'package:rick_and_morty/feature/home/domain/repository/home_repository.da
 import 'package:rick_and_morty/feature/home/domain/usecase/get_character_page.dart';
 import 'package:rick_and_morty/feature/home/domain/usecase/update_character_list.dart';
 import 'package:rick_and_morty/feature/home/presentation/bloc/home_cubit.dart';
-import 'package:rick_and_morty/service/local/local.dart';
+import 'package:rick_and_morty/service/storage/local_storage.dart';
 import 'package:rick_and_morty/shared/data/datasource/shared_local_data_source.dart';
 import 'package:rick_and_morty/shared/data/datasource/shared_local_data_source_impl.dart';
 import 'package:rick_and_morty/shared/data/repository/shared_repository_impl.dart';

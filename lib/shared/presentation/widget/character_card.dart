@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:rick_and_morty/config/theme/t.dart';
 import 'package:rick_and_morty/feature/character/presentation/page/character_page.dart';
 import 'package:rick_and_morty/shared/domain/entity/character.dart';
 
@@ -24,7 +23,7 @@ class CharacterCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: T.of(context).colorScheme.tertiary,
+          color: Theme.of(context).colorScheme.tertiary,
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Row(
@@ -38,7 +37,7 @@ class CharacterCard extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: T.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -63,7 +62,7 @@ class CharacterCard extends StatelessWidget {
                       Expanded(
                         child: Text(
                           character.name,
-                          style: T
+                          style: Theme
                               .of(context)
                               .textTheme
                               .titleLarge!
@@ -90,7 +89,7 @@ class CharacterCard extends StatelessWidget {
 
                   Text(
                     character.status.name,
-                    style: T
+                    style: Theme
                         .of(context)
                         .textTheme
                         .bodyLarge!
@@ -99,7 +98,7 @@ class CharacterCard extends StatelessWidget {
 
                   Text(
                     '${character.species}${character.type.isEmpty ? '' : ' | ${character.type}'}',
-                    style: T
+                    style: Theme
                         .of(context)
                         .textTheme
                         .bodyLarge!

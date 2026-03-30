@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:rick_and_morty/config/theme/t.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/page/favorite_page.dart';
 import 'package:rick_and_morty/feature/home/presentation/page/home_page.dart';
 
@@ -26,7 +25,7 @@ class MyNavigationBar extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      color: T.of(context).colorScheme.tertiary,
+      color: Theme.of(context).colorScheme.tertiary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -70,8 +69,8 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       color: isActive
-          ? T.of(context).colorScheme.secondary
-          : T.of(context).colorScheme.secondary.withAlpha(64),
+          ? Theme.of(context).colorScheme.secondary
+          : Theme.of(context).colorScheme.secondary.withAlpha(64),
       onPressed: onTap,
       icon: Icon(icon),
     );

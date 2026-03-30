@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 import 'package:rick_and_morty/feature/character/presentation/bloc/character_cubit.dart';
 import 'package:rick_and_morty/feature/character/presentation/bloc/character_state.dart';
 import 'package:rick_and_morty/feature/character/presentation/widget/character_loaded_content.dart';
@@ -26,7 +26,7 @@ class _CharacterPageState extends State<CharacterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          S.of(context).characterPageTitle,
+          AppLocale.of(context).characterPageTitle,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [

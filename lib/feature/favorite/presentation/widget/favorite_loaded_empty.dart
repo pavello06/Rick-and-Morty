@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
-import 'package:rick_and_morty/config/theme/t.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 
 class FavoriteLoadedEmpty extends StatelessWidget {
   const FavoriteLoadedEmpty({super.key});
@@ -9,8 +8,8 @@ class FavoriteLoadedEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        S.of(context).favoriteLoadedEmptyText,
-        style: T.of(context).textTheme.titleLarge,
+        AppLocale.of(context).favoriteLoadedEmptyText,
+        style: Theme.of(context).textTheme.titleLarge,
         textAlign: TextAlign.center,
       ),
     );

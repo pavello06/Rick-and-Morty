@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/config/l10n/s.dart';
-import 'package:rick_and_morty/config/theme/t.dart';
+import 'package:rick_and_morty/config/l10n/app_locale.dart';
 
 class ErrorContent extends StatelessWidget {
   const ErrorContent({super.key, required this.onRetry});
@@ -14,16 +13,16 @@ class ErrorContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          S.of(context).errorContentText,
-          style: T.of(context).textTheme.titleLarge,
+          AppLocale.of(context).errorContentText,
+          style: Theme.of(context).textTheme.titleLarge,
           textAlign: TextAlign.center,
         ),
 
         TextButton(
           onPressed: onRetry,
           child: Text(
-            S.of(context).errorContentButton,
-            style: T.of(context).textTheme.bodyLarge,
+            AppLocale.of(context).errorContentButton,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ],
