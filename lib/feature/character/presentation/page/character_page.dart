@@ -5,11 +5,14 @@ import 'package:rick_and_morty/config/l10n/app_locale.dart';
 import 'package:rick_and_morty/feature/character/presentation/bloc/character_cubit.dart';
 import 'package:rick_and_morty/feature/character/presentation/bloc/character_state.dart';
 import 'package:rick_and_morty/feature/character/presentation/widget/character_loaded_content.dart';
+import 'package:rick_and_morty/service/di/di.dart';
 import 'package:rick_and_morty/shared/presentation/widget/error_content.dart';
 import 'package:rick_and_morty/shared/presentation/widget/loading_content.dart';
 
 class CharacterPage extends StatefulWidget {
-  const CharacterPage({super.key});
+  const CharacterPage({super.key, required this.id});
+
+  final int id;
 
   static const route = '/character/:id';
 
@@ -23,56 +26,59 @@ class CharacterPage extends StatefulWidget {
 class _CharacterPageState extends State<CharacterPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppLocale.of(context).characterPageTitle,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+    return BlocProvider<CharacterCubit>.value(
+      value: DI.getIt(param1: widget.id),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            AppLocale.of(context).characterPageTitle,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            BlocBuilder<CharacterCubit, CharacterState>(
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: state is CharacterLoaded
+                      ? () {
+                          context.read<CharacterCubit>().toggleCharacter(
+                            state.character,
+                          );
+                        }
+                      : null,
+                  icon: state is CharacterLoaded && state.character.isFavorite
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_border),
+                );
+              },
+            ),
+          ],
         ),
-        actions: [
-          BlocBuilder<CharacterCubit, CharacterState>(
+      
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+          child: BlocBuilder<CharacterCubit, CharacterState>(
             builder: (context, state) {
-              return IconButton(
-                onPressed: state is CharacterLoaded
-                    ? () {
-                        context.read<CharacterCubit>().toggleCharacter(
-                          state.character,
-                        );
-                      }
-                    : null,
-                icon: state is CharacterLoaded && state.character.isFavorite
-                    ? const Icon(Icons.favorite)
-                    : const Icon(Icons.favorite_border),
-              );
+              if (state is CharacterInitial) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  context.read<CharacterCubit>().init();
+                });
+      
+                return const LoadingContent();
+              } else if (state is CharacterLoading) {
+                return const LoadingContent();
+              } else if (state is CharacterLoaded) {
+                return CharacterLoadedContent(state: state);
+              } else if (state is CharacterError) {
+                return ErrorContent(
+                  onRetry: () {
+                    context.read<CharacterCubit>().init();
+                  },
+                );
+              }
+      
+              return const SizedBox.shrink();
             },
           ),
-        ],
-      ),
-
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-        child: BlocBuilder<CharacterCubit, CharacterState>(
-          builder: (context, state) {
-            if (state is CharacterInitial) {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                context.read<CharacterCubit>().init();
-              });
-
-              return const LoadingContent();
-            } else if (state is CharacterLoading) {
-              return const LoadingContent();
-            } else if (state is CharacterLoaded) {
-              return CharacterLoadedContent(state: state);
-            } else if (state is CharacterError) {
-              return ErrorContent(
-                onRetry: () {
-                  context.read<CharacterCubit>().init();
-                },
-              );
-            }
-
-            return const SizedBox.shrink();
-          },
         ),
       ),
     );

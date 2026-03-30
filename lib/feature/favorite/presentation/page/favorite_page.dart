@@ -5,6 +5,7 @@ import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_cubit
 import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_state.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/widget/favorite_loaded_content.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/widget/favorite_loaded_empty.dart';
+import 'package:rick_and_morty/service/di/di.dart';
 import 'package:rick_and_morty/shared/presentation/widget/error_content.dart';
 import 'package:rick_and_morty/shared/presentation/widget/loading_content.dart';
 
@@ -22,30 +23,33 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCubit, FavoriteState>(
-      builder: (context, state) {
-        if (state is FavoriteInitial) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            context.read<FavoriteCubit>().init();
-          });
-
-          return LoadingContent();
-        } else if (state is FavoriteLoading) {
-          return LoadingContent();
-        } else if (state is FavoriteLoaded) {
-          if (state.characters.isEmpty) return const FavoriteLoadedEmpty();
-
-          return FavoriteLoadedContent(state: state);
-        } else if (state is FavoriteError) {
-          return ErrorContent(
-            onRetry: () {
+    return BlocProvider<FavoriteCubit>.value(
+      value: DI.getIt()..update(),
+      child: BlocBuilder<FavoriteCubit, FavoriteState>(
+        builder: (context, state) {
+          if (state is FavoriteInitial) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
               context.read<FavoriteCubit>().init();
-            },
-          );
-        }
-
-        return const SizedBox.shrink();
-      },
+            });
+      
+            return LoadingContent();
+          } else if (state is FavoriteLoading) {
+            return LoadingContent();
+          } else if (state is FavoriteLoaded) {
+            if (state.characters.isEmpty) return const FavoriteLoadedEmpty();
+      
+            return FavoriteLoadedContent(state: state);
+          } else if (state is FavoriteError) {
+            return ErrorContent(
+              onRetry: () {
+                context.read<FavoriteCubit>().init();
+              },
+            );
+          }
+      
+          return const SizedBox.shrink();
+        },
+      ),
     );
   }
 }
