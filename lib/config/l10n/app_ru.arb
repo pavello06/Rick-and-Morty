@@ -1,6 +1,22 @@
 {
+    "characterGenderMale": "Мужской",
+    "characterGenderFemale": "Женский",
+    "characterGenderGenderless": "Без пола",
+    "characterGenderUnknown": "Неизвестно",
+
+    "characterStatusAlive": "Живой",
+    "characterStatusDead": "Мертвый",
+    "characterStatusUnknown": "Неизвестно",
+
     "errorContentText": "Произошла ошибка. Попробуйте еще раз.",
     "errorContentButton": "Повторить",
 
-    "errorSnackBarText": "Произошла ошибка."
+    "errorSnackBarText": "Произошла ошибка.",
+
+
+    "characterPageTitle": "Персонаж",
+
+    "characterLoadedContentOrigin": "Родной мир: {origin}",
+    "characterLoadedContentLocation": "Текущая локация: {location}",
+    "characterLoadedContentEpisode": "Серия: {episode}"
 }

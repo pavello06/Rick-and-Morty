@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/config/constant/app_constant.dart';
+import 'package:rick_and_morty/feature/character/presentation/bloc/character_cubit.dart';
+import 'package:rick_and_morty/feature/character/presentation/page/character_page.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_cubit.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/page/favorite_page.dart';
 import 'package:rick_and_morty/feature/home/presentation/bloc/home_cubit.dart';
@@ -52,6 +54,18 @@ final appRouter = GoRouter(
           },
         ),
       ],
+    ),
+
+    GoRoute(
+      path: CharacterPage.route,
+      builder: (context, state) {
+        final id = int.parse(state.pathParameters['id']!);
+
+        return BlocProvider<CharacterCubit>.value(
+          value: DI.getIt(param1: id),
+          child: const CharacterPage(),
+        );
+      },
     ),
   ],
   initialLocation: HomePage.route,

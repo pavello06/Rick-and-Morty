@@ -94,6 +94,48 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('ru')];
 
+  /// No description provided for @characterGenderMale.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мужской'**
+  String get characterGenderMale;
+
+  /// No description provided for @characterGenderFemale.
+  ///
+  /// In ru, this message translates to:
+  /// **'Женский'**
+  String get characterGenderFemale;
+
+  /// No description provided for @characterGenderGenderless.
+  ///
+  /// In ru, this message translates to:
+  /// **'Без пола'**
+  String get characterGenderGenderless;
+
+  /// No description provided for @characterGenderUnknown.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестно'**
+  String get characterGenderUnknown;
+
+  /// No description provided for @characterStatusAlive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Живой'**
+  String get characterStatusAlive;
+
+  /// No description provided for @characterStatusDead.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мертвый'**
+  String get characterStatusDead;
+
+  /// No description provided for @characterStatusUnknown.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестно'**
+  String get characterStatusUnknown;
+
   /// No description provided for @errorContentText.
   ///
   /// In ru, this message translates to:
@@ -111,6 +153,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Произошла ошибка.'**
   String get errorSnackBarText;
+
+  /// No description provided for @characterPageTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Персонаж'**
+  String get characterPageTitle;
+
+  /// No description provided for @characterLoadedContentOrigin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Родной мир: {origin}'**
+  String characterLoadedContentOrigin(Object origin);
+
+  /// No description provided for @characterLoadedContentLocation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Текущая локация: {location}'**
+  String characterLoadedContentLocation(Object location);
+
+  /// No description provided for @characterLoadedContentEpisode.
+  ///
+  /// In ru, this message translates to:
+  /// **'Серия: {episode}'**
+  String characterLoadedContentEpisode(Object episode);
 }
 
 class _AppLocalizationsDelegate
