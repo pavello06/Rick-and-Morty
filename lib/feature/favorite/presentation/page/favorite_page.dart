@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_cubit.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/bloc/favorite_state.dart';
 import 'package:rick_and_morty/feature/favorite/presentation/widget/favorite_loaded_content.dart';
+import 'package:rick_and_morty/feature/favorite/presentation/widget/favorite_loaded_empty.dart';
 import 'package:rick_and_morty/shared/presentation/widget/error_content.dart';
 import 'package:rick_and_morty/shared/presentation/widget/loading_content.dart';
 
@@ -32,6 +33,8 @@ class _FavoritePageState extends State<FavoritePage> {
         } else if (state is FavoriteLoading) {
           return LoadingContent();
         } else if (state is FavoriteLoaded) {
+          if (state.characters.isEmpty) return const FavoriteLoadedEmpty();
+
           return FavoriteLoadedContent(state: state);
         } else if (state is FavoriteError) {
           return ErrorContent(

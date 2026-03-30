@@ -39,6 +39,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorSnackBarText => 'Произошла ошибка.';
 
   @override
+  String get favoriteLoadedEmptyText => 'Нет сохраненных персонажей.';
+
+  @override
   String get characterPageTitle => 'Персонаж';
 
   @override

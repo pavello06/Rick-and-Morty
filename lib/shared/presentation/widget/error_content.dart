@@ -13,11 +13,10 @@ class ErrorContent extends StatelessWidget {
       spacing: 16.0,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Center(
-          child: Text(
-            S.of(context).errorContentText,
-            style: T.of(context).textTheme.titleLarge,
-          ),
+        Text(
+          S.of(context).errorContentText,
+          style: T.of(context).textTheme.titleLarge,
+          textAlign: TextAlign.center,
         ),
 
         TextButton(

@@ -154,6 +154,12 @@ abstract class AppLocalizations {
   /// **'Произошла ошибка.'**
   String get errorSnackBarText;
 
+  /// No description provided for @favoriteLoadedEmptyText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет сохраненных персонажей.'**
+  String get favoriteLoadedEmptyText;
+
   /// No description provided for @characterPageTitle.
   ///
   /// In ru, this message translates to:
