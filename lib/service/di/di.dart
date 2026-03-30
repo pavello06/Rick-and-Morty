@@ -1,4 +1,12 @@
 import 'package:get_it/get_it.dart';
+import 'package:rick_and_morty/feature/character/data/datasource/character_local_data_source.dart';
+import 'package:rick_and_morty/feature/character/data/datasource/character_local_data_source_impl.dart';
+import 'package:rick_and_morty/feature/character/data/datasource/character_remote_data_source.dart';
+import 'package:rick_and_morty/feature/character/data/datasource/character_remote_data_source_impl.dart';
+import 'package:rick_and_morty/feature/character/data/repository/character_repository_impl.dart';
+import 'package:rick_and_morty/feature/character/domain/repository/character_repository.dart';
+import 'package:rick_and_morty/feature/character/domain/usecase/get_character.dart';
+import 'package:rick_and_morty/feature/character/presentation/bloc/character_cubit.dart';
 import 'package:rick_and_morty/feature/favorite/data/datasource/favorite_local_data_source.dart';
 import 'package:rick_and_morty/feature/favorite/data/datasource/favorite_local_data_source_impl.dart';
 import 'package:rick_and_morty/feature/favorite/data/repository/favorite_repository_impl.dart';
@@ -97,6 +105,31 @@ abstract class DI {
         getFavoriteCharacterList: getIt(),
         deleteCharacter: getIt(),
       ),
+    );
+
+    // CHARACTER
+    // Data source
+    getIt.registerLazySingleton<CharacterRemoteDataSource>(
+      () => CharacterRemoteDataSourceImpl(),
+    );
+    getIt.registerLazySingleton<CharacterLocalDataSource>(
+      () => CharacterLocalDataSourceImpl(),
+    );
+
+    // Repository
+    getIt.registerLazySingleton<CharacterRepository>(
+      () => CharacterRepositoryImpl(
+        remoteDataSource: getIt(),
+        localDataSource: getIt(),
+      ),
+    );
+
+    // Use case
+    getIt.registerLazySingleton(() => GetCharacter(getIt()));
+
+    // Bloc
+    getIt.registerFactoryParam<CharacterCubit, int, void>(
+      (id, _) => CharacterCubit(id: id, getCharacter: getIt()),
     );
   }
 }
